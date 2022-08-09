@@ -1,12 +1,14 @@
 describe("payment", () => {
+  beforeEach(() => {
+    cy.visit("http://localhost:3000/");
+  });
   it("user can make payments", () => {
-    // login
-    cy.visit("http://10.76.81.197:3000");
-    cy.get("input").filter("#username").first().type("johndoe");
-    cy.get("input").filter("#password").type("s3cret");
-    cy.contains("button", /sign in/i).click();
-
+    //create bank account
     // check balance
+    let oldBalance;
+    cy.get("[data-test=sidenav-user-balance]").then(($balance) => (oldBalance = $balance.text()));
+    // click on new button
+    cy.contains("button", /new/i).click();
     // click pay
     // searvh for user
     // add amt and note and click pay
